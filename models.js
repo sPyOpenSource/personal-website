@@ -1,11 +1,11 @@
 (function ($, Backbone, _, app) {
-	
+
     // CSRF helper functions taken directly from Django docs
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/i.test(method));
     }
-    
+
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
@@ -22,7 +22,7 @@
         }
         return cookieValue;
     }
-    
+
     // Setup jQuery ajax calls to handle CSRF
     $.ajaxPrefilter(function (settings, originalOptions, xhr) {
         var csrftoken;
@@ -73,7 +73,7 @@
             }
         }
     });
-    
+
     app.session = new Session();
 
     var BaseModel = Backbone.Model.extend({
@@ -87,32 +87,20 @@
         }
     });
 
-    app.models.Sprint = BaseModel.extend({
-        fetchTasks: function () {
-            var links = this.get('links');
-            if (links && links.tasks) {
-                app.tasks.fetch({url: links.tasks, remove: false});
-            }
+    app.models.Category = BaseModel.extend({
+        fetchItems: function () {
+            var id = this.get('id');
+            var name = this.get('name');
         }
     });
-    app.models.Task = BaseModel.extend({
-        statusClass: function () {
-            var sprint = this.get('sprint'),
-                status;
-            if (!sprint) {
-                status =  'unassigned';
-            } else {
-                status = ['todo', 'active', 'testing', 'done'][this.get('status') - 1];
-            }
-            return status;
-        },
-        inBacklog: function () {
-            return !this.get('sprint');
-        },
-        inSprint: function (sprint) {
-            return sprint.get('id') == this.get('sprint');
+
+    app.models.Item = BaseModel.extend({
+        fetchItems: function(){
+          var id = this.get('id');
+          var title = this.get('title');
         }
     });
+
     app.models.User = BaseModel.extend({
         idAttributemodel: 'username'
     });
@@ -146,24 +134,26 @@
 
     app.collections.ready = $.getJSON(app.apiRoot);
     app.collections.ready.done(function (data) {
-        app.collections.Sprints = BaseCollection.extend({
-            model: app.models.Sprint,
-            url: data.sprints
+        app.collections.Categories = BaseCollection.extend({
+            model: app.models.Category,
+            url: data.category
         });
-        app.sprints = new app.collections.Sprints();
-        app.collections.Tasks = BaseCollection.extend({
-            model: app.models.Task,
-            url: data.tasks,
+        app.categories = new app.collections.Categories();
+
+        app.collections.Items = BaseCollection.extend({
+            model: app.models.Item,
+            url: data.item,
             getBacklog: function () {
                 this.fetch({remove: false, data: {backlog: 'True'}});
             }
         });
-        app.tasks = new app.collections.Tasks();
+        app.items = new app.collections.Items();
+
         app.collections.Users = BaseCollection.extend({
             model: app.models.User,
             url: data.users
         });
         app.users = new app.collections.Users();
     });
-    
+
 })(jQuery, Backbone, _, app);
