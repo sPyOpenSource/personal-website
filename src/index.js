@@ -6,7 +6,9 @@ import './index.css';
 import Layout from './Layout';
 import Home from './view/Home';
 import About from './view/About';
-import Work from './view/Work';
+import Media from './view/Media';
+import Projects from './view/Projects';
+import Contact from './view/Contact';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -14,7 +16,9 @@ ReactDOM.render(
       <IndexRoute component={Home}></IndexRoute>
       <Route path="home" component={Home}></Route>
       <Route path="about" component={About}></Route>
-      <Route path="work" component={Work}></Route>
+      <Route path="media" component={Media}></Route>
+      <Route path="projects" component={Projects}></Route>
+      <Route path="contact" component={Contact}></Route>
     </Route>
   </Router>,
   document.getElementById('root')
