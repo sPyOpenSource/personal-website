@@ -8,7 +8,6 @@ import Home from './view/Home';
 import About from './view/About';
 import Media from './view/Media';
 import Projects from './view/Projects';
-import Contact from './view/Contact';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -18,7 +17,6 @@ ReactDOM.render(
       <Route path="about" component={About}></Route>
       <Route path="media" component={Media}></Route>
       <Route path="projects" component={Projects}></Route>
-      <Route path="contact" component={Contact}></Route>
     </Route>
   </Router>,
   document.getElementById('root')
