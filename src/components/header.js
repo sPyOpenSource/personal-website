@@ -1,44 +1,48 @@
-'use strict';
+import React, { Component } from 'react';
 
-const React = require('react');
-
-const Header = React.createClass({
-    getInitialState: function () {
-        return {
-            window: {
-                height: 0,
-                width: 0
-            }
-        };
-    },
-
-    updateDimensions: function () {
-        return this.setState({
-            window: {
-                height: window.innerHeight,
-                width: window.innerWidth
-            }
-        });
-    },
-
-    componentWillMount: function () {
-        this.updateDimensions();
-    },
-
-    componentDidMount: function () {
-        return window.addEventListener('resize', this.updateDimensions);
-    },
-
-    render: function () {
-        const style = {
-            height: this.state.window.height
-        };
-        return (
-            <header id='home' style={style}>
-                {this.props.children}
-            </header>
-        );
+class Header extends Component {
+  constructor() {
+    super();
+    this.toggle = this.toggle.bind(this);
+    this.reset = this.reset.bind(this);
+    this.state = {
+      classes: "navbar-collapse collapse"
+    };
+  }
+  reset() {
+    this.setState({classes: "navbar-collapse collapse"});
+  }
+  toggle() {
+    if (this.state.classes==="navbar-collapse collapse"){
+      this.setState({classes: "navbar-collapse"});
+    } else {
+      this.setState({classes: "navbar-collapse collapse"});
     }
-});
+  }
+  render() {
+    return (
+      <nav id="myNavbar" className="navbar navbar-default navbar inverse" role="navigation">
+        <div className="container">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle" onClick={this.toggle}>
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#/home" onClick={this.reset}>Personal Website</a>
+          </div>
+          <div className={this.state.classes}>
+            <ul className="nav navbar-nav" onClick={this.reset}>
+              <li><a href="#/about">About</a></li>
+              <li><a href="#/media">Media</a></li>
+              <li><a href="#/projects">Projects</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+}
 
-module.exports = Header;
+export default Header;

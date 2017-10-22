@@ -1,3 +1,13 @@
-v1.1 XW 24-06-2017
-removed contact page
-added footer in each page
+v1.4 22-10-2017 XW
+added: p2p video streaming (issue #4)
+fixed: navbar (issue #5)
+
+v1.3 15-10-2017 XW
+removed: bootstrap.js and jquery.js
+
+v1.2 16-06-2017 XW
+fixed: donate button is in dutch. (issue #1)
+
+v1.1 24-06-2017 XW
+removed: contact page
+added: footer in each page

@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 class About extends Component {
   render() {
     return (
-	       <div>
-            <div className="span3">
+	       <div className="container">
+            <div>
 	      		   <img src="./img/DSC00195.jpg" height="386" width="290" alt="My face"/>
 	    	    </div>
-	    	    <div className="span6">
+	    	    <div>
 		            <strong>Biography:</strong>
                 <p>
-                  I was born on February 10th.
+                  I was born in 1988.
                   In 2001 I emigrated from China to Netherlands.
                   I've finished my Master's degree (Applied Physics) at Delft University of Technology.
                   I've worked on a Master's Thesis Project of 2D crystaline materials at Molecular Electronics and Devices group of Quantum Nanoscience Department.
@@ -27,9 +27,9 @@ class About extends Component {
 		            <a href="./files/NanoReport1.0.pdf">Nanotechnology Report</a>: Impact of plasma chemistry of SiO2 substrate etching, 2012
                 <br/>
 		            <a href="./files/graphenev2.pdf">Bachelor's Thesis Project</a>: Determination of the ionic capacitance of graphene, 2011
-                <br/>
             </div>
-          </div>
+            <br/>
+        </div>
     );
   }
 }
