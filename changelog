@@ -1,3 +1,7 @@
+v1.5 25-10-2017 XW
+added: unittest
+cleared: unused js files
+
 v1.4 22-10-2017 XW
 added: p2p video streaming (issue #4)
 fixed: navbar (issue #5)
