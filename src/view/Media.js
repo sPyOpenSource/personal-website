@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import WebTorrent from '../webtorrent';
+//import * as THREE from 'three';
+var THREE = require('../utils/OBJLoader');
 
 class Media extends Component {
   constructor() {
@@ -32,6 +34,21 @@ class Media extends Component {
     file.renderTo('video');
   }
   render() {
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, 640/480, 0.1, 1000);
+    let renderer = new THREE.WebGLRenderer();
+    let loader = new THREE.OBJLoader();
+    var material = new THREE.PointsMaterial( { color: 0x00ffff, size: 0.002 } );
+    loader.load('/media/test2.obj', function(object){
+      var cube = new THREE.Points( object, material );
+      scene.add(cube);
+      renderer.setSize(640, 480);
+      camera.position.z = 1.5;
+      camera.position.x = 0;
+      camera.position.y = 0;
+      renderer.render(scene, camera);
+      document.body.appendChild(renderer.domElement);
+    })
     return (
       <div className="container">
         <video controls width="100%" style={{display:this.state.display}}>

@@ -5,7 +5,7 @@ class About extends Component {
     return (
 	       <div className="container">
             <div>
-	      		   <img src="./img/DSC00195.jpg" height="386" width="290" alt="My face"/>
+	      		   <img src="./img/DSC001952.jpg" height="386" width="290" alt="My face"/>
 	    	    </div>
 	    	    <div>
 		            <strong>Biography:</strong>
