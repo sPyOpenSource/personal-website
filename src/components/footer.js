@@ -16,7 +16,7 @@ class Footer extends Component {
               <p>
                 Any amount of donation is appreciated.
                 The major use of your donation is to support the open source projects.
-                If you have any questions, then you can use <a href="/git/">Git Server</a>.
+                If you have any questions, then you can use <a href="/git/index.html">Git Server</a>.
               </p>
               <input type="submit" value="Donate" className="btn btn-primary"/>
             </form>

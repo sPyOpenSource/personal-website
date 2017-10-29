@@ -1,3 +1,8 @@
+v2.1 29-10-2017 XW
+removed: 3D viewer for obj file
+added: files into .gitignore
+updated: package.json
+
 v2.0 28-10-2017 XW
 fixed: images compression (issue #2)
 removed: unnecessary js files.
