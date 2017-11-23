@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import WebTorrent from '../webtorrent';
-//import * as THREE from 'three';
-//var THREE = require('../utils/OBJLoader');
+var THREE = require('../utils/OBJLoader');
 
 class Media extends Component {
   constructor() {
     super();
     this.download = this.download.bind(this);
     this.play = this.play.bind(this);
+    this.turn = this.turn.bind(this);
+    this._handleWindowResize = this._handleWindowResize.bind(this);
     this.state = {
-      display: "none"
+      display: "none",
+      camera: new THREE.PerspectiveCamera(75, 640/480, 0.1, 1000),
+      scene: new THREE.Scene(),
+      renderer: new THREE.WebGLRenderer(),
+      angle: 0
     };
   }
   play(e) {
@@ -28,47 +33,77 @@ class Media extends Component {
       client.add(torrentIds[e.target.alt], this.download);
     }
   }
-  download(torrent){
+  download(torrent) {
     // Torrents can contain many files. Let's use the .mp4 file
     let file = torrent.files[0];
     // Display the file by adding it to the DOM.
-    // Supports video, audio, image files, and more!
     this.setState({display: 'block'});
     file.renderTo('video');
   }
+  turn(e) {
+    e.preventDefault();
+    this.setState({angle: this.state.angle + 0.1});
+  }
+  componentDidMount() {
+    window.addEventListener('resize', this._handleWindowResize);
+    this._handleWindowResize();
+  }
+  _handleWindowResize() {
+    let image = document.getElementById("image");
+    this.setState({
+      imageWidth: image.offsetWidth
+    });
+    let canvas = document.getElementsByTagName("canvas")[0];
+    canvas.width = image.offsetWidth;
+    canvas.height = image.offsetWidth*0.75;
+  }
   render() {
-    /*let scene = new THREE.Scene();
-    let camera = new THREE.PerspectiveCamera(75, 640/480, 0.1, 1000);
-    let renderer = new THREE.WebGLRenderer();
+    let scene = this.state.scene;
+    let camera = this.state.camera;
+    let renderer = this.state.renderer;
+    let angle = this.state.angle;
     let loader = new THREE.OBJLoader();
-    var material = new THREE.PointsMaterial( { color: 0x00ffff, size: 0.002 } );
-    loader.load('/media/test2.obj', function(object){
-      var cube = new THREE.Points( object, material );
-      scene.add(cube);
-      renderer.setSize(640, 480);
-      camera.position.z = 1.5;
-      camera.position.x = 0;
+    let material = new THREE.PointsMaterial( { color: 0x00ffff, size: 0.001 } );
+    let width = this.state.imageWidth;
+    let height = width*0.75;
+    loader.load('/img/test.obj', function(object){
+      let img = new THREE.Points( object, material );
+      scene.add(img);
+      renderer.setSize(width, height);
+      camera.position.z = 1.3*Math.cos(angle);
+      camera.position.x = 1.3*Math.sin(angle);
       camera.position.y = 0;
+      camera.up = new THREE.Vector3(0,1,0);
+      camera.lookAt( new THREE.Vector3(0,0,0) );
       renderer.render(scene, camera);
-      document.body.appendChild(renderer.domElement);
-    })*/
+      document.getElementById("3DImage").append(renderer.domElement);
+    })
     return (
       <div className="container">
-        <video controls width="100%" style={{display:this.state.display}}>
-        </video>
+        <video controls width="100%" style={{display:this.state.display}}></video>
         <br/>
         <div className="row">
           <div className="col-sm-4">
-            <a href="./media/093.mp4" onClick={this.play}><img src="img/videos/germany.png" alt="Bike Show" className="img-responsive"></img></a>
+            <a href="./media/093.mp4" onClick={this.play}>
+              <img id="image" src="img/videos/germany.png" alt="Bike Show" className="img-responsive"></img>
+            </a>
             <p>Bike Show at Germany.</p>
           </div>
           <div className="col-sm-4">
-            <a href="./media/0669.mp4" onClick={this.play}><img src="img/videos/spring.png" alt="Story of the Spring" className="img-responsive"></img></a>
+            <a href="./media/0669.mp4" onClick={this.play}>
+              <img src="img/videos/spring.png" alt="Story of the Spring" className="img-responsive"></img>
+            </a>
             <p>Story of the Spring at Chinese New Year's Eve Doelen (Rotterdam, The Netherlands).</p>
           </div>
           <div className="col-sm-4">
-            <a href="./media/0920.mp4" onClick={this.play}><img src="img/videos/show.png" alt="Modeshow" className="img-responsive"></img></a>
+            <a href="./media/0920.mp4" onClick={this.play}>
+              <img src="img/videos/show.png" alt="Modeshow" style={{width:this.state.imageWidth}}></img>
+            </a>
             <p>You are Beautiful Modeshow at Theather Zuidplein (Rotterdam, The Netherlands) supported by Red Cross.</p>
+          </div>
+          <div className="col-sm-4">
+            <a href="#" onClick={this.turn} id="3DImage"></a>
+            <p>This is a 3D image made with a RealSence Camera (Utrecht, The Netherlands).</p>
           </div>
         </div>
       </div>
