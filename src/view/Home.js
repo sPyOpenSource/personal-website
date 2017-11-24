@@ -5,9 +5,9 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Welcome:</h1>
+        <h2>Welcome:</h2>
         <p>This is my personal web page. It is a little summary of my past work...</p>
-	      <h1>News:</h1>
+	      <h2>News:</h2>
         <div dangerouslySetInnerHTML={{__html: markdown.toHTML("7 October 2017: I've added p2p feature in video streaming.")}} />
         <div dangerouslySetInnerHTML={{__html: markdown.toHTML("22 June 2017: I'm using react.js to build my website.")}} />
 	      <p>20 October 2016: I have made a new design for my website, please check it out.</p>
