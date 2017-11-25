@@ -5,8 +5,13 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <h2>Welcome:</h2>
-        <p>This is my personal web page. It is a little summary of my past work...</p>
+        <p>
+          You are welcome to visite my personal website.
+          This is my personal web page. It is a little summary of my past work. I hava worked on 2D materials and simultions. My main intrest is Nanoscience. I have done three projects.
+          One project is about how to build a drone. Two other projects are about climate.
+          You can also found three videos which I have made in the past. They are videos which I have taken at some events.
+          I have worked on a Git Server project and a Wiki. I have Twitter, Facebook and LinkedIn.
+        </p>
 	      <h2>News:</h2>
         <div dangerouslySetInnerHTML={{__html: markdown.toHTML("7 October 2017: I've added p2p feature in video streaming.")}} />
         <div dangerouslySetInnerHTML={{__html: markdown.toHTML("22 June 2017: I'm using react.js to build my website.")}} />
