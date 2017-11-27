@@ -55,10 +55,9 @@ class About extends Component {
                 </MathJax.Context>
                 <MathJax.Context>
                   <p>
-                    In this report we present an optimal ratio of the CHF<MathJax.Node inline>{'_4'}</MathJax.Node>/O<MathJax.Node inline>{'_2'}</MathJax.Node> concentration for etching of SiO<MathJax.Node inline>{'_2'}</MathJax.Node> substrate.
-                    We found the optimal concentration ratio is to have no O<MathJax.Node inline>{'_2'}</MathJax.Node> at the inlet gas.
-                    The whole process of pattern design, pattern lithograph and dry etching are described in this report.
-                    We have also inspected the structure before, after and during etching with different methods.
+                    In this report we present a dry etching technique for SiO<MathJax.Node inline>{'_2'}</MathJax.Node> substrate.
+                    The whole process this technique of pattern design, pattern lithograph and etching are described in this report.
+                    We have also inspected the structure before, after and during etching with different techniques.
                     The process of pattern transfer, coating of the photoresist and pattern development are also explained in this report.
                   </p>
                 </MathJax.Context>
