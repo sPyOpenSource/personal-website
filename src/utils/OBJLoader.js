@@ -376,195 +376,188 @@ THREE.OBJLoader = ( function () {
 			}
 
 			var lines = text.split( '\n' );
-			var line = '', lineFirstChar = '';
-			var lineLength = 0;
-			var result = [];
 
 			// Faster to just trim left side of the line. Use if available.
 			var trimLeft = ( typeof ''.trimLeft === 'function' );
-
-			for ( var i = 0, l = lines.length; i < l; i ++ ) {
-
-				line = lines[ i ];
-
+			for ( let line of lines ) {
 				line = trimLeft ? line.trimLeft() : line.trim();
 
-				lineLength = line.length;
+				if ( line.length === 0 ) continue;
 
-				if ( lineLength === 0 ) continue;
-
-				lineFirstChar = line.charAt( 0 );
+				var lineFirstChar = line.charAt( 0 );
 
 				// @todo invoke passed in handler if any
-				if ( lineFirstChar === '#' ) continue;
+				switch ( lineFirstChar ) {
+					case '#': continue;
 
-				if ( lineFirstChar === 'v' ) {
+					case 'v':
+						var data = line.split( /\s+/ );
 
-					var data = line.split( /\s+/ );
+						switch ( data[ 0 ] ) {
+							case 'v':
+								var star = new THREE.Vector3();
+								star.x = parseFloat( data[ 1 ] );
+					    	star.y = - parseFloat( data[ 2 ] );
+					    	star.z = parseFloat( data[ 3 ] );
+								starsGeometry.vertices.push(star);
+								state.vertices.push(
+									parseFloat( data[ 1 ] ),
+									parseFloat( data[ 2 ] ),
+									parseFloat( data[ 3 ] )
+								);
+								break;
+							case 'vn':
+								state.normals.push(
+									parseFloat( data[ 1 ] ),
+									parseFloat( data[ 2 ] ),
+									parseFloat( data[ 3 ] )
+								);
+								break;
+							case 'vt':
+								state.uvs.push(
+									parseFloat( data[ 1 ] ),
+									parseFloat( data[ 2 ] )
+								);
+								break;
+							default:
+								break;
+						}
+						break;
 
-					switch ( data[ 0 ] ) {
+					case 'f':
+						var lineData = line.substr( 1 ).trim();
+						var vertexData = lineData.split( /\s+/ );
+						var faceVertices = [];
 
-						case 'v':
-							var star = new THREE.Vector3();
-							star.x = parseFloat( data[ 1 ] );
-				    	star.y = - parseFloat( data[ 2 ] );
-				    	star.z = parseFloat( data[ 3 ] );
-							starsGeometry.vertices.push(star);
-							state.vertices.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] ),
-								parseFloat( data[ 3 ] )
-							);
-							break;
-						case 'vn':
-							state.normals.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] ),
-								parseFloat( data[ 3 ] )
-							);
-							break;
-						case 'vt':
-							state.uvs.push(
-								parseFloat( data[ 1 ] ),
-								parseFloat( data[ 2 ] )
-							);
-							break;
-						default:
-							break;
-					}
+						// Parse the face vertex data into an easy to work with format
 
-				} else if ( lineFirstChar === 'f' ) {
+						for ( var n = 0, jl = vertexData.length; n < jl; n ++ ) {
 
-					var lineData = line.substr( 1 ).trim();
-					var vertexData = lineData.split( /\s+/ );
-					var faceVertices = [];
+							var vertex = vertexData[ n ];
 
-					// Parse the face vertex data into an easy to work with format
+							if ( vertex.length > 0 ) {
 
-					for ( var n = 0, jl = vertexData.length; n < jl; n ++ ) {
+								var vertexParts = vertex.split( '/' );
+								faceVertices.push( vertexParts );
 
-						var vertex = vertexData[ n ];
-
-						if ( vertex.length > 0 ) {
-
-							var vertexParts = vertex.split( '/' );
-							faceVertices.push( vertexParts );
+							}
 
 						}
 
-					}
+						// Draw an edge between the first vertex and all subsequent vertices to form an n-gon
 
-					// Draw an edge between the first vertex and all subsequent vertices to form an n-gon
+						var v1 = faceVertices[ 0 ];
 
-					var v1 = faceVertices[ 0 ];
+						for ( var j = 1, jln = faceVertices.length - 1; j < jln; j ++ ) {
 
-					for ( var j = 1, jln = faceVertices.length - 1; j < jln; j ++ ) {
+							var v2 = faceVertices[ j ];
+							var v3 = faceVertices[ j + 1 ];
 
-						var v2 = faceVertices[ j ];
-						var v3 = faceVertices[ j + 1 ];
-
-						state.addFace(
-							v1[ 0 ], v2[ 0 ], v3[ 0 ],
-							v1[ 1 ], v2[ 1 ], v3[ 1 ],
-							v1[ 2 ], v2[ 2 ], v3[ 2 ]
-						);
-
-					}
-
-				} else if ( lineFirstChar === 'l' ) {
-
-					var lineParts = line.substring( 1 ).trim().split( " " );
-					var lineVertices = [], lineUVs = [];
-
-					if ( line.indexOf( "/" ) === - 1 ) {
-
-						lineVertices = lineParts;
-
-					} else {
-
-						for ( var li = 0, llen = lineParts.length; li < llen; li ++ ) {
-
-							var parts = lineParts[ li ].split( "/" );
-
-							if ( parts[ 0 ] !== "" ) lineVertices.push( parts[ 0 ] );
-							if ( parts[ 1 ] !== "" ) lineUVs.push( parts[ 1 ] );
+							state.addFace(
+								v1[ 0 ], v2[ 0 ], v3[ 0 ],
+								v1[ 1 ], v2[ 1 ], v3[ 1 ],
+								v1[ 2 ], v2[ 2 ], v3[ 2 ]
+							);
 
 						}
+						break;
 
-					}
-					state.addLineGeometry( lineVertices, lineUVs );
+					case 'l':
+						var lineParts = line.substring( 1 ).trim().split( " " );
+						var lineVertices = [], lineUVs = [];
 
-				} else if ( ( result = object_pattern.exec( line ) ) !== null ) {
+						if ( line.indexOf( "/" ) === - 1 ) {
 
-					// o object_name
-					// or
-					// g group_name
+							lineVertices = lineParts;
 
-					// WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
-					// var name = result[ 0 ].substr( 1 ).trim();
-					var name = ( " " + result[ 0 ].substr( 1 ).trim() ).substr( 1 );
+						} else {
 
-					state.startObject( name );
+							for ( var li = 0, llen = lineParts.length; li < llen; li ++ ) {
 
-				} else if ( material_use_pattern.test( line ) ) {
+								var parts = lineParts[ li ].split( "/" );
 
-					// material
+								if ( parts[ 0 ] !== "" ) lineVertices.push( parts[ 0 ] );
+								if ( parts[ 1 ] !== "" ) lineUVs.push( parts[ 1 ] );
 
-					state.object.startMaterial( line.substring( 7 ).trim(), state.materialLibraries );
+							}
 
-				} else if ( material_library_pattern.test( line ) ) {
+						}
+						state.addLineGeometry( lineVertices, lineUVs );
+					break;
 
-					// mtl file
+				default:
+					let result = object_pattern.exec( line );
+					if ( result !== null ) {
 
-					state.materialLibraries.push( line.substring( 7 ).trim() );
+						// o object_name
+						// or
+						// g group_name
 
-				} else if ( lineFirstChar === 's' ) {
+						// WORKAROUND: https://bugs.chromium.org/p/v8/issues/detail?id=2869
+						// var name = result[ 0 ].substr( 1 ).trim();
+						var name = ( " " + result[ 0 ].substr( 1 ).trim() ).substr( 1 );
 
-					result = line.split( ' ' );
+						state.startObject( name );
 
-					// smooth shading
+					} else if ( material_use_pattern.test( line ) ) {
 
-					// @todo Handle files that have varying smooth values for a set of faces inside one geometry,
-					// but does not define a usemtl for each face set.
-					// This should be detected and a dummy material created (later MultiMaterial and geometry groups).
-					// This requires some care to not create extra material on each smooth value for "normal" obj files.
-					// where explicit usemtl defines geometry groups.
-					// Example asset: examples/models/obj/cerberus/Cerberus.obj
+						// material
 
-					/*
-					 * http://paulbourke.net/dataformats/obj/
-					 * or
-					 * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
-					 *
-					 * From chapter "Grouping" Syntax explanation "s group_number":
-					 * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
-					 * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
-					 * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
-					 * than 0."
-					 */
-					if ( result.length > 1 ) {
+						state.object.startMaterial( line.substring( 7 ).trim(), state.materialLibraries );
 
-						var value = result[ 1 ].trim().toLowerCase();
-						state.object.smooth = ( value !== '0' && value !== 'off' );
+					} else if ( material_library_pattern.test( line ) ) {
+
+						// mtl file
+
+						state.materialLibraries.push( line.substring( 7 ).trim() );
+
+					} else if ( lineFirstChar === 's' ) {
+
+						result = line.split( ' ' );
+
+						// smooth shading
+
+						// @todo Handle files that have varying smooth values for a set of faces inside one geometry,
+						// but does not define a usemtl for each face set.
+						// This should be detected and a dummy material created (later MultiMaterial and geometry groups).
+						// This requires some care to not create extra material on each smooth value for "normal" obj files.
+						// where explicit usemtl defines geometry groups.
+						// Example asset: examples/models/obj/cerberus/Cerberus.obj
+
+						/*
+						 * http://paulbourke.net/dataformats/obj/
+						 * or
+						 * http://www.cs.utah.edu/~boulos/cs3505/obj_spec.pdf
+						 *
+						 * From chapter "Grouping" Syntax explanation "s group_number":
+						 * "group_number is the smoothing group number. To turn off smoothing groups, use a value of 0 or off.
+						 * Polygonal elements use group numbers to put elements in different smoothing groups. For free-form
+						 * surfaces, smoothing groups are either turned on or off; there is no difference between values greater
+						 * than 0."
+						 */
+						if ( result.length > 1 ) {
+
+							var value = result[ 1 ].trim().toLowerCase();
+							state.object.smooth = ( value !== '0' && value !== 'off' );
+
+						} else {
+
+							// ZBrush can produce "s" lines #11707
+							state.object.smooth = true;
+
+						}
+						var material = state.object.currentMaterial();
+						if ( material ) material.smooth = state.object.smooth;
 
 					} else {
 
-						// ZBrush can produce "s" lines #11707
-						state.object.smooth = true;
+						// Handle null terminated files without exception
+						if ( line === '\0' ) continue;
+
+						throw new Error( "Unexpected line: '" + line  + "'" );
 
 					}
-					var material = state.object.currentMaterial();
-					if ( material ) material.smooth = state.object.smooth;
-
-				} else {
-
-					// Handle null terminated files without exception
-					if ( line === '\0' ) continue;
-
-					throw new Error( "Unexpected line: '" + line  + "'" );
-
 				}
-
 			}
 
 			state.finalize();
@@ -609,33 +602,33 @@ THREE.OBJLoader = ( function () {
 				for ( var mi = 0, miLen = materials.length; mi < miLen ; mi++ ) {
 
 					var sourceMaterial = materials[ mi ];
-					var material = undefined;
+					var createMaterial = undefined;
 
 					if ( this.materials !== null ) {
 
-						material = this.materials.create( sourceMaterial.name );
+						createMaterial = this.materials.create( sourceMaterial.name );
 
 						// mtl etc. loaders probably can't create line materials correctly, copy properties to a line material.
-						if ( isLine && material && ! ( material instanceof THREE.LineBasicMaterial ) ) {
+						if ( isLine && createMaterial && ! ( createMaterial instanceof THREE.LineBasicMaterial ) ) {
 
 							var materialLine = new THREE.LineBasicMaterial();
-							materialLine.copy( material );
-							material = materialLine;
+							materialLine.copy( createMaterial );
+							createMaterial = materialLine;
 
 						}
 
 					}
 
-					if ( ! material ) {
+					if ( ! createMaterial ) {
 
-						material = ( ! isLine ? new THREE.MeshPhongMaterial() : new THREE.LineBasicMaterial() );
-						material.name = sourceMaterial.name;
+						createMaterial = ( ! isLine ? new THREE.MeshPhongMaterial() : new THREE.LineBasicMaterial() );
+						createMaterial.name = sourceMaterial.name;
 
 					}
 
-					material.flatShading = sourceMaterial.smooth ? false : true;
+					createMaterial.flatShading = sourceMaterial.smooth ? false : true;
 
-					createdMaterials.push(material);
+					createdMaterials.push(createMaterial);
 
 				}
 
@@ -645,10 +638,10 @@ THREE.OBJLoader = ( function () {
 
 				if ( createdMaterials.length > 1 ) {
 
-					for ( var mi = 0, miLen = materials.length; mi < miLen ; mi++ ) {
+					for ( var mindex = 0 ; mindex < materials.length ; mindex++ ) {
 
-						var sourceMaterial = materials[ mi ];
-						buffergeometry.addGroup( sourceMaterial.groupStart, sourceMaterial.groupCount, mi );
+						var sourceCreateMaterial = materials[ mindex ];
+						buffergeometry.addGroup( sourceCreateMaterial.groupStart, sourceCreateMaterial.groupCount, mindex );
 
 					}
 
@@ -664,11 +657,10 @@ THREE.OBJLoader = ( function () {
 				container.add( mesh );
 
 			}
-			return starsGeometry;
-			console.timeEnd( 'OBJLoader' );
-			//container.add(cube);
-			return container;
 
+			console.timeEnd( 'OBJLoader' );
+
+			return starsGeometry;
 		}
 
 	};
