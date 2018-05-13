@@ -21,7 +21,7 @@ class About extends Component {
                   I have written following papers during my study at Delft University of Technology.
                 </p>
                 <MathJax.Context>
-                  <a href="/files/mscThesis.pdf">
+                  <a href="/html/papers/master.html">
                     <h2>
                       Strain engineering in atomically thin MoS<MathJax.Node inline>{'_2'}</MathJax.Node> and MoSe<MathJax.Node inline>{'_2'}</MathJax.Node>
                     </h2>
@@ -37,7 +37,7 @@ class About extends Component {
                     Secondly we do not see a significant change in the bandgap energy of MoSe<MathJax.Node inline>{'_2'}</MathJax.Node> when up to 0.4% strain is applied by using the wrinkling technique.
                   </p>
                 </MathJax.Context>
-                <a href="/files/Report.pdf">
+                <a href="/html/papers/intern.html">
                   <h2>Simulating hindered diffusion</h2>
                 </a>
                 <p>
@@ -49,7 +49,7 @@ class About extends Component {
                   We have also investigate a model of mitochondria which describes the diffusion process inside mitochondria.
                 </p>
                 <MathJax.Context>
-                  <a href="/files/NanoReport2.0.pdf">
+                  <a href="/html/papers/nano.html">
                     <h2>Impact of plasma chemistry of SiO<MathJax.Node inline>{'_2'}</MathJax.Node> substrate etching</h2>
                   </a>
                 </MathJax.Context>
@@ -61,7 +61,7 @@ class About extends Component {
                     The process of pattern transfer, coating of the photoresist and pattern development are also explained in this report.
                   </p>
                 </MathJax.Context>
-                  <a href="/files/graphenev2.pdf">
+                  <a href="/html/papers/bachelor.html">
                     <h2>Determination of the ionic capacitance of graphene</h2>
                   </a>
                 <MathJax.Context>
