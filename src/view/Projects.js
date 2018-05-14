@@ -6,7 +6,7 @@ class Projects extends Component {
       <div className="container">
         <div className="row">
         	<div className="col-sm-4">
-        	  <a href="./files/drones.pdf"><img src="img/projects/IMG_1882_web.JPG" alt="Drone" className="img-responsive"></img></a>
+        	  <a href="/html/projects.html#artificial-intelligence-drone"><img src="img/projects/IMG_1882_web.JPG" alt="Drone" className="img-responsive"></img></a>
         	</div>
         	<div className="col-sm-8">
         	  <p>
@@ -15,14 +15,14 @@ class Projects extends Component {
               On the later phase we are going to build a network of drones.
               The drones can communicate with each other inside this network.
               They form a swarm of drones...
-              <a href="./files/ganttchartdrone.ods">Show Progress</a>
+              <a href="/files/ganttchartdrone.ods">Show Progress</a>
             </p>
         	</div>
         </div>
         <br/>
       	<div className="row">
       	  <div className="col-sm-4">
-            <a href="https://www.dropbox.com/s/t86jtx7dazg9mri/proposalv4.pdf?dl=0"><img src="img/projects/XY-meterExploded-view.jpg" alt="XY-meter" className="img-responsive"></img></a>
+            <a href="/html/projects.html#weather-observation-pole"><img src="img/projects/XY-meterExploded-view.jpg" alt="XY-meter" className="img-responsive"></img></a>
           </div>
           <div className="col-sm-8">
             <p>
@@ -32,14 +32,14 @@ class Projects extends Component {
               Our anemometer gets the second place of this challenge.
               Until now we have made a design of our anemometer.
               We need to improve it in order to build a human size anemometer in the mekelpark...
-              <a href="./files/ganttchart.ods">Show Progress</a>
+              <a href="/files/ganttchart.ods">Show Progress</a>
             </p>
         	 </div>
       	 </div>
       	 <br/>
       	 <div className="row">
         	 <div className="col-sm-4">
-        	   <a href="http://ccc.weblog.tudelft.nl/category/measuringwater/weatherobservationpole/"><img src="img/projects/impressie_wop.jpg" alt="Weatherpole" className="img-responsive"></img></a>
+        	   <a href="/html/projects.html#xy-anemometer"><img src="img/projects/impressie_wop.jpg" alt="Weatherpole" className="img-responsive"></img></a>
         	 </div>
         	 <div className="col-sm-8">
         	   <p>
