@@ -14,8 +14,7 @@ class Projects extends Component {
               The aim of those projects are to build drones which can be charged by itself.
               On the later phase we are going to build a network of drones.
               The drones can communicate with each other inside this network.
-              They form a swarm of drones...
-              <a href="/files/ganttchartdrone.ods">Show Progress</a>
+              They form a swarm of drones... <a href="/files/ganttchartdrone.ods">Show Progress</a>
             </p>
         	</div>
         </div>
@@ -31,8 +30,7 @@ class Projects extends Component {
               It starts by a challenge program within Delft Honours Program.
               Our anemometer gets the second place of this challenge.
               Until now we have made a design of our anemometer.
-              We need to improve it in order to build a human size anemometer in the mekelpark...
-              <a href="/files/ganttchart.ods">Show Progress</a>
+              We need to improve it in order to build a human size anemometer in the mekelpark... <a href="/files/ganttchart.ods">Show Progress</a>
             </p>
         	 </div>
       	 </div>
