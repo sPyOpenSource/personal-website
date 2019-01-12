@@ -11,7 +11,7 @@ class Footer extends Component {
               <a href="https://soundcloud.com/xuyi-wang"><img className="avatar" alt="SoundCload" src="img/social_network_icons/soundcload2.png"/></a>
             </p>
             <p>
-              You can also use following resources: <a href="/ai.html">AI Demo</a>, <a href="/git/index.html">Git Server</a> or <a href="/html/index.html">Wiki</a>.
+              You can also use following resources: <a href="/git/index.html">Git Server</a> and <a href="/html/index.html">Wiki</a>.
             </p>
           </footer>
         );

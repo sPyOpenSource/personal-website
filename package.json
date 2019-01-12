@@ -4,10 +4,14 @@
   "private": true,
   "homepage": "http://s55969da3.adsl.online.nl/",
   "dependencies": {
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0",
     "react-mathjax": "^0.1.1",
-    "react-router": "^3.0.0"
+    "react-redux": "^5.0.6",
+    "react-router": "^3.0.0",
+    "redux": "^3.7.2",
+    "three": "0.87.1",
+    "webtorrent": "0.98.19"
   },
   "devDependencies": {
     "react-scripts": "0.9.5",

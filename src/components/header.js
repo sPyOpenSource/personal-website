@@ -37,6 +37,7 @@ class Header extends Component {
               <li><a href="#/about">About</a></li>
               <li><a href="#/media">Media</a></li>
               <li><a href="#/projects">Projects</a></li>
+              <li><a href="#/game">Game</a></li>
             </ul>
           </div>
         </div>

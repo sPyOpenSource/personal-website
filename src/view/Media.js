@@ -15,9 +15,10 @@ class Media extends Component {
     this.renderer      = new THREE.WebGLRenderer();
     this.state = {
       display: "none",
-      angle:   0
+      angle: 0
     };
   }
+
   play(e) {
     if (WebTorrent.WEBRTC_SUPPORT) {
       // WebRTC is supported
@@ -34,6 +35,7 @@ class Media extends Component {
       client.add(torrentIds[e.target.alt], this.download);
     }
   }
+
   download(torrent) {
     // Torrents can contain many files. Let's use the .mp4 file
     let file = torrent.files[0];
@@ -41,16 +43,19 @@ class Media extends Component {
     this.setState({display: 'block'});
     file.renderTo('video');
   }
+
   turn(e) {
     e.preventDefault();
     this.setState({angle: this.state.angle + 0.1});
   }
+
   componentDidMount() {
     let handler  = this._handleResize;
     let scene    = this.scene;
     let renderer = this.renderer;
     let camera   = this.camera;
-    let loader   = new THREE.OBJLoader();
+    let loader   = new THREE.OBJLoaderCloud();
+
     camera.position.z = 1.3;
     camera.position.x = 0;
     camera.position.y = 0;
@@ -62,6 +67,7 @@ class Media extends Component {
     });
     window.addEventListener('resize', handler);
   }
+
   _handleResize() {
     let width = document.getElementById("image").offsetWidth;
     this.setState({
@@ -71,6 +77,7 @@ class Media extends Component {
     canvas.width  = width;
     canvas.height = width * 0.75;
   }
+
   render() {
     let width    = this.state.imageWidth;
     let angle    = this.state.angle;
@@ -84,30 +91,30 @@ class Media extends Component {
     renderer.render(this.scene, camera);
     return (
       <div className="container">
-        <video controls width="100%" style={{display: this.state.display}}></video>
-        <br style={{display:this.state.display}}/>
-        <div className="row">
-          <div className="col-sm-4">
-            <a href="./media/093.mp4" onClick={this.play}>
-              <img id="image" src="img/videos/germany.png" alt="Bike Show" className="img-responsive"></img>
+        <video controls width = "100%" style = {{display: this.state.display}}></video>
+        <br style = {{display:this.state.display}}/>
+        <div className = "row">
+          <div className = "col-sm-4">
+            <a href = "./media/093.mp4" onClick={this.play}>
+              <img id = "image" src = "img/videos/germany.png" alt = "Bike Show" className = "img-responsive"></img>
             </a>
             <p>Bike Show at Germany.</p>
           </div>
-          <div className="col-sm-4">
-            <a href="./media/0669.mp4" onClick={this.play}>
-              <img src="img/videos/spring.png" alt="Story of the Spring" className="img-responsive"></img>
+          <div className = "col-sm-4">
+            <a href = "./media/0669.mp4" onClick = {this.play}>
+              <img src = "img/videos/spring.png" alt = "Story of the Spring" className = "img-responsive"></img>
             </a>
-            <div dangerouslySetInnerHTML={{__html: markdown.toHTML("Story of the Spring at Chinese New Year's Eve Doelen (Rotterdam, The Netherlands).")}} />
+            <div dangerouslySetInnerHTML = {{__html: markdown.toHTML("Story of the Spring at Chinese New Year's Eve Doelen (Rotterdam, The Netherlands).")}} />
           </div>
-          <div className="col-sm-4">
-            <a href="./media/0920.mp4" onClick={this.play}>
-              <img src="img/videos/show.png" alt="Modeshow" style={{width: this.state.imageWidth}}></img>
+          <div className = "col-sm-4">
+            <a href = "./media/0920.mp4" onClick = {this.play}>
+              <img src = "img/videos/show.png" alt = "Modeshow" className = "img-responsive"></img>
             </a>
             <p>You are Beautiful Modeshow at Theather Zuidplein (Rotterdam, The Netherlands) supported by Red Cross.</p>
           </div>
-          <div className="col-sm-4">
-            <a href="#" onClick={this.turn} id="3DImage"></a>
-            <div dangerouslySetInnerHTML={{__html: markdown.toHTML("This is a 3D image made with a RealSence Camera (Utrecht, The Netherlands).")}} />
+          <div className = "col-sm-4">
+            <a href = "#" onClick={this.turn} id = "3DImage"></a>
+            <div dangerouslySetInnerHTML = {{__html: markdown.toHTML("This is a 3D image made with a RealSence Camera (Utrecht, The Netherlands).")}} />
           </div>
         </div>
       </div>

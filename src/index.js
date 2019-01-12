@@ -8,6 +8,7 @@ import Home from './view/Home';
 import About from './view/About';
 import Media from './view/Media';
 import Projects from './view/Projects';
+import Game from './view/Game';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Route path="about" component={About}></Route>
       <Route path="media" component={Media}></Route>
       <Route path="projects" component={Projects}></Route>
+      <Route path="game" component={Game}></Route>
     </Route>
   </Router>,
   document.getElementById('root')
