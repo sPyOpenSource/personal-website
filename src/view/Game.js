@@ -64,26 +64,10 @@ class Game extends Component {
     	}
     );
     var fontLoader = new THREE.FontLoader();
-    fontLoader.load( 'fonts/gentilis_bold.typeface.json', function ( response ) {
+    fontLoader.load('fonts/gentilis_bold.typeface.json', function(response){
       createText(response, '');
-    } );
+    });
     renderer.setSize(800, 600);
-    var loader = new THREE.TextureLoader();
-    loader.load('/tiles/chest.png',
-      function(texture){
-        var material = new THREE.MeshBasicMaterial({
-          map: texture
-        });
-        var geometry = new THREE.PlaneGeometry(50, 50);
-        var mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(0, 0, 0);
-        //scene.add(mesh);
-      },
-      undefined,
-      function(err){
-        console.error('An error happened.')
-      }
-    );
     document.getElementById("Game").append(renderer.domElement);
     window.addEventListener('keydown', (e) => {
       this.handleKeyDown(e)
@@ -91,20 +75,15 @@ class Game extends Component {
     webSocket.onopen = function(event){
       //webSocket.send("hello");
     }
-    webSocket.onmessage = function(event) {
+    webSocket.onmessage = function(event){
       let textMesh = scene.getObjectByName("text");
       scene.remove(textMesh);
-      fontLoader.load( 'fonts/gentilis_bold.typeface.json', function ( response ) {
-        createText(response, event.data);
-      } );
-      console.log(event.data);
+      createText(null, event.data);
     }
     animate();
   }
 
-  handleKeyDown(e) {
-    //e.preventDefault()
-
+  handleKeyDown(e){
     let drone = this.scene.getObjectByName("drone");
     if (typeof drone != "undefined"){
       switch(e.keyCode) {
@@ -141,21 +120,29 @@ class Game extends Component {
   }
 
   createText(font, text){
+    if (font){
       this.font = font;
-      let textGeo = new THREE.TextGeometry(text, {
-        font: this.font,
-        size: 80,
-        height: 5,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelSegments: 5
-      });
-      textGeo = new THREE.BufferGeometry().fromGeometry(textGeo);
-      let textMesh = new THREE.Mesh(textGeo);
-      textMesh.name = "text";
-      this.scene.add(textMesh);
+    }
+    let textGeo = new THREE.TextGeometry(text, {
+      font: this.font,
+      size: 80,
+      height: 5,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 10,
+      bevelSize: 8,
+      bevelSegments: 5
+    });
+    textGeo.computeBoundingBox();
+		textGeo.computeVertexNormals();
+    textGeo = new THREE.BufferGeometry().fromGeometry(textGeo);
+    let materials = [
+					new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } ), // front
+					new THREE.MeshPhongMaterial( { color: 0xffffff } ) // side
+				];
+    let textMesh = new THREE.Mesh(textGeo, materials);
+    textMesh.name = "text";
+    this.scene.add(textMesh);
   }
 
   animate(){
