@@ -30,7 +30,9 @@ class Media extends Component {
       let torrentIds = {
         'Modeshow':            'magnet:?xt=urn:btih:916379bed14225a646b1fa3ba4d12614b6d7ae47&dn=0920.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F0920.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F0920.torrent',
         'Bike Show':           'magnet:?xt=urn:btih:86355cc4bb7dd710cb8947777ebff5b852887d84&dn=093.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F093.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F093.torrent',
-        'Story of the Spring': 'magnet:?xt=urn:btih:8e28dc57738cf60125cdf3c6f5e081827cef70b2&dn=0669.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F0669.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F0669.torrent'
+        'Story of the Spring': 'magnet:?xt=urn:btih:8e28dc57738cf60125cdf3c6f5e081827cef70b2&dn=0669.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F0669.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F0669.torrent',
+        'Clash of Clans':      'magnet:?xt=urn:btih:9512d00578c949f4eec1a39bdccbd2352050ed1e&dn=5149.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F5149.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F5149.torrent',
+        'Real Racing 3':       'magnet:?xt=urn:btih:9087582e1702f531767132ffa2a23e8e8a6a9481&dn=5533.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F5533.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F5533.torrent'
       };
       client.add(torrentIds[e.target.alt], this.download);
     }
@@ -75,7 +77,7 @@ class Media extends Component {
     });
     let canvas    = document.getElementsByTagName("canvas")[0];
     canvas.width  = width;
-    canvas.height = width * 0.75;
+    canvas.height = width * 0.56;
   }
 
   render() {
@@ -87,30 +89,41 @@ class Media extends Component {
     camera.position.x = 1.3 * Math.sin(angle);
     camera.up = new THREE.Vector3(0, 1, 0);
     camera.lookAt( new THREE.Vector3(0, 0, 0) );
-    renderer.setSize(width, width * 0.75);
+    renderer.setSize(width, width * 0.56);
     renderer.render(this.scene, camera);
     return (
       <div className="container">
-        <video controls width = "100%" style = {{display: this.state.display}}></video>
-        <br style = {{display:this.state.display}}/>
+        <video controls width = "100%" style = {{display: this.state.display, marginBottom: "20px"}}></video>
         <div className = "row">
           <div className = "col-sm-4">
             <a href = "./media/093.mp4" onClick={this.play}>
-              <img id = "image" src = "img/videos/germany.png" alt = "Bike Show" className = "img-responsive"></img>
+              <img id = "image" src = "img/videos/germany2.png" alt = "Bike Show" className = "img-responsive"></img>
             </a>
             <p>Bike Show at Germany.</p>
           </div>
           <div className = "col-sm-4">
             <a href = "./media/0669.mp4" onClick = {this.play}>
-              <img src = "img/videos/spring.png" alt = "Story of the Spring" className = "img-responsive"></img>
+              <img src = "img/videos/spring2.png" alt = "Story of the Spring" className = "img-responsive"></img>
             </a>
             <div dangerouslySetInnerHTML = {{__html: markdown.toHTML("Story of the Spring at Chinese New Year's Eve Doelen (Rotterdam, The Netherlands).")}} />
           </div>
           <div className = "col-sm-4">
             <a href = "./media/0920.mp4" onClick = {this.play}>
-              <img src = "img/videos/show.png" alt = "Modeshow" className = "img-responsive"></img>
+              <img src = "img/videos/show2.png" alt = "Modeshow" className = "img-responsive"></img>
             </a>
             <p>You are Beautiful Modeshow at Theather Zuidplein (Rotterdam, The Netherlands) supported by Red Cross.</p>
+          </div>
+          <div className = "col-sm-4">
+            <a href = "./media/5149.mp4" onClick = {this.play}>
+              <img src = "img/videos/clashofclans.png" alt = "Clash of Clans" className = "img-responsive"></img>
+            </a>
+            <p>This is a video of a Clash of Clans attack.</p>
+          </div>
+          <div className = "col-sm-4">
+            <a href = "./media/5533.mp4" onClick = {this.play}>
+              <img src = "img/videos/realracing3.png" alt = "Real Racing 3" className = "img-responsive"></img>
+            </a>
+            <p>This is a video of a racing of BMW M3 GTS.</p>
           </div>
           <div className = "col-sm-4">
             <a href = "#" onClick={this.turn} id = "3DImage"></a>

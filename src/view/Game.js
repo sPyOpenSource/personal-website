@@ -8,7 +8,7 @@ class Game extends Component {
     this.scene      = new THREE.Scene();
     this.clock      = new THREE.Clock();
     this.renderer   = new THREE.WebGLRenderer();
-    this.webSocket  = new WebSocket("ws://localhost:9000");
+    this.webSocket  = new WebSocket('ws://' + window.location.host + '/ai/');
     this.animate    = this.animate.bind(this);
     this.onSubmit   = this.onSubmit.bind(this);
     this.createText = this.createText.bind(this);
@@ -64,16 +64,18 @@ class Game extends Component {
     	}
     );
     var fontLoader = new THREE.FontLoader();
-    fontLoader.load('fonts/gentilis_bold.typeface.json', function(response){
-      createText(response, '');
-    });
     renderer.setSize(800, 600);
     document.getElementById("Game").append(renderer.domElement);
     window.addEventListener('keydown', (e) => {
-      this.handleKeyDown(e)
+      this.handleKey(e)
+    })
+    window.addEventListener('keyup', (e) => {
+      this.handleKey(e)
     })
     webSocket.onopen = function(event){
-      //webSocket.send("hello");
+      fontLoader.load('fonts/gentilis_bold.typeface.json', function(response){
+        createText(response, 'Connected');
+      });
     }
     webSocket.onmessage = function(event){
       let textMesh = scene.getObjectByName("text");
@@ -83,28 +85,54 @@ class Game extends Component {
     animate();
   }
 
-  handleKeyDown(e){
+  handleKey(e){
     let drone = this.scene.getObjectByName("drone");
     if (typeof drone != "undefined"){
       switch(e.keyCode) {
+        case 13:
+          if (e.type === "keydown"){
+            this.onSubmit(e)
+          }
+          break;
+
         case 37:
-          drone.velocity.x -= 10;
+          if (e.type === "keydown"){
+            drone.acceleration.x = -100;
+          } else {
+            drone.acceleration.x = 0;
+          }
           break;
 
         case 38:
-          drone.velocity.z -= 10;
+          if (e.type === "keydown"){
+            drone.acceleration.z = -100;
+          } else {
+            drone.acceleration.z = 0;
+          }
           break;
 
         case 39:
-          drone.velocity.x += 10;
+          if (e.type === "keydown"){
+            drone.acceleration.x = 100;
+          } else {
+            drone.acceleration.x = 0;
+          }
           break;
 
         case 40:
-          drone.velocity.z += 10;
+          if (e.type === "keydown"){
+            drone.acceleration.z = 100;
+          } else {
+            drone.acceleration.z = 0;
+          }
           break;
 
         case 32:
-          drone.velocity.y = 100;
+          if (e.type == "keydown"){
+            drone.acceleration.y = 100;
+          } else {
+            drone.acceleration.y = -981;
+          }
           break;
 
         default:
@@ -115,8 +143,9 @@ class Game extends Component {
 
   onSubmit(e){
     e.preventDefault();
-    var message = this.message;
+    let message = this.message;
     this.webSocket.send(message.value);
+    message.value = '';
   }
 
   createText(font, text){
@@ -125,7 +154,7 @@ class Game extends Component {
     }
     let textGeo = new THREE.TextGeometry(text, {
       font: this.font,
-      size: 80,
+      size: 40,
       height: 5,
       curveSegments: 12,
       bevelEnabled: true,
@@ -141,6 +170,10 @@ class Game extends Component {
 					new THREE.MeshPhongMaterial( { color: 0xffffff } ) // side
 				];
     let textMesh = new THREE.Mesh(textGeo, materials);
+    textMesh.position.x = -500;
+    textMesh.position.y = 500;
+    textMesh.position.z = -100;
+    textMesh.rotation.y = 0.4;
     textMesh.name = "text";
     this.scene.add(textMesh);
   }
@@ -156,9 +189,6 @@ class Game extends Component {
       drone.position.y += delta * drone.velocity.y;
       drone.velocity.z += delta * drone.acceleration.z;
       drone.position.z += delta * drone.velocity.z;
-      //drone.rotateX(delta);
-      //drone.rotateY(delta);
-      //drone.rotateZ(delta);
       if (drone.position.y <= 0){
         drone.position.y = 0;
         drone.velocity.y = 0;
@@ -174,7 +204,7 @@ class Game extends Component {
     return (
       <div className = "container">
         <div id = "Game"></div>
-        <input type = "text" ref = {(c) => this.message = c} name = "message"/><button type = "button" onClick = {this.onSubmit} className = "btn">Send</button>
+        <input type = "text" ref = {(c) => this.message = c} name = "message" style = {{width: "738px"}}/><button type = "button" onClick = {this.onSubmit} className = "btn btn-info">Send</button>
       </div>
     )
   }

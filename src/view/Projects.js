@@ -21,7 +21,7 @@ class Projects extends Component {
         <br/>
       	<div className="row">
       	  <div className="col-sm-4">
-            <a href="/html/projects.html#weather-observation-pole"><img src="img/projects/XY-meterExploded-view.jpg" alt="XY-meter" className="img-responsive"></img></a>
+            <a href="/html/projects.html#xy-anemometer"><img src="img/projects/XY-meterExploded-view.jpg" alt="XY-meter" className="img-responsive"></img></a>
           </div>
           <div className="col-sm-8">
             <p>
@@ -37,7 +37,7 @@ class Projects extends Component {
       	 <br/>
       	 <div className="row">
         	 <div className="col-sm-4">
-        	   <a href="/html/projects.html#xy-anemometer"><img src="img/projects/impressie_wop.jpg" alt="Weatherpole" className="img-responsive"></img></a>
+        	   <a href="/html/projects.html#weather-observation-pole"><img src="img/projects/impressie_wop.jpg" alt="Weatherpole" className="img-responsive"></img></a>
         	 </div>
         	 <div className="col-sm-8">
         	   <p>
