@@ -35,6 +35,7 @@ class Media extends Component {
         'Real Racing 3':       'magnet:?xt=urn:btih:9087582e1702f531767132ffa2a23e8e8a6a9481&dn=5533.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&as='+escape(window.location.origin)+'%2Fmedia%2F5533.mp4&xs='+escape(window.location.origin)+'%2Fmedia%2F5533.torrent'
       };
       client.add(torrentIds[e.target.alt], this.download);
+      window.scrollTo(0, 0)
     }
   }
 

@@ -204,7 +204,9 @@ class Game extends Component {
     return (
       <div className = "container">
         <div id = "Game"></div>
-        <input type = "text" ref = {(c) => this.message = c} name = "message" style = {{width: "738px"}}/><button type = "button" onClick = {this.onSubmit} className = "btn btn-info">Send</button>
+        <div style = {{width: "800px"}}>
+          <input type = "text" ref = {(c) => this.message = c} name = "message" style = {{width: "738px"}}/><button type = "button" onClick = {this.onSubmit} className = "btn btn-info">Send</button>
+        </div>
       </div>
     )
   }
