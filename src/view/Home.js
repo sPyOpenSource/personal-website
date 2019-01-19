@@ -15,6 +15,7 @@ class Home extends Component {
           I have worked on a Git Server project.
         </p>
 	      <h2>News:</h2>
+        <p>18 January 2019: I have added two videos and a drone simulation game.</p>
         <div dangerouslySetInnerHTML={{__html: markdown.toHTML("7 October 2017: I've added p2p feature in video streaming.")}} />
         <div dangerouslySetInnerHTML={{__html: markdown.toHTML("22 June 2017: I'm using react.js to build my website.")}} />
 	      <p>20 October 2016: I have made a new design for my website, please check it out.</p>

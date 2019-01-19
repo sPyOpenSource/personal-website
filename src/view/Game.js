@@ -4,14 +4,16 @@ let THREE = require('../utils/OBJLoader');
 class Game extends Component {
   constructor() {
     super();
-    this.camera     = new THREE.PerspectiveCamera(75, 800/600, 1, 10000);
-    this.scene      = new THREE.Scene();
-    this.clock      = new THREE.Clock();
-    this.renderer   = new THREE.WebGLRenderer();
-    this.webSocket  = new WebSocket('ws://' + window.location.host + '/ai/');
-    this.animate    = this.animate.bind(this);
-    this.onSubmit   = this.onSubmit.bind(this);
-    this.createText = this.createText.bind(this);
+    this.camera        = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+    this.scene         = new THREE.Scene();
+    this.clock         = new THREE.Clock();
+    this.renderer      = new THREE.WebGLRenderer();
+    this.webSocket     = new WebSocket('ws://' + window.location.host + '/ai/');
+    this.animate       = this.animate.bind(this);
+    this.onSubmit      = this.onSubmit.bind(this);
+    this.createText    = this.createText.bind(this);
+    this._handleResize = this._handleResize.bind(this);
+    this.state         = {}
   }
 
   componentDidMount() {
@@ -21,6 +23,7 @@ class Game extends Component {
     let renderer   = this.renderer;
     let camera     = this.camera;
     let animate    = this.animate;
+    let handler    = this._handleResize;
     let objLoader  = new THREE.OBJLoader();
     let TexLoader  = new THREE.TextureLoader();
     let keyLight   = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
@@ -64,7 +67,7 @@ class Game extends Component {
     	}
     );
     var fontLoader = new THREE.FontLoader();
-    renderer.setSize(800, 600);
+    //renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById("Game").append(renderer.domElement);
     window.addEventListener('keydown', (e) => {
       this.handleKey(e)
@@ -72,6 +75,10 @@ class Game extends Component {
     window.addEventListener('keyup', (e) => {
       this.handleKey(e)
     })
+    window.addEventListener('devicemotion', (e) => {
+      this.handleKey(e)
+    }, true)
+    window.addEventListener('resize', handler)
     webSocket.onopen = function(event){
       fontLoader.load('fonts/gentilis_bold.typeface.json', function(response){
         createText(response, 'Connected');
@@ -83,20 +90,114 @@ class Game extends Component {
       createText(null, event.data);
     }
     animate();
+    let canvas = document.getElementsByTagName("canvas")[0]
+    canvas.addEventListener("touchstart", (e) => {
+      this.handleKey(e)
+      }, false
+    )
+    canvas.addEventListener("touchend", (e) => {
+      this.handleKey(e)
+      }, false
+    )
+    handler()
+  }
+
+  _handleResize() {
+    let camera = this.camera
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    let width = document.getElementById("Game").offsetWidth;
+    this.setState({
+      imageWidth: width
+    });
+    let canvas    = document.getElementsByTagName("canvas")[0];
+    canvas.width  = width;
+    canvas.height = width *  window.innerHeight / window.innerWidth
   }
 
   handleKey(e){
     let drone = this.scene.getObjectByName("drone");
     if (typeof drone != "undefined"){
-      switch(e.keyCode) {
+      let keyCode = e.keyCode
+      let type = e.type
+      if (e.type === "devicemotion"){
+        if (e.accelerationIncludingGravity.x > 5){
+          if (e.accelerationIncludingGravity.y > 1){
+            type = "keydown"
+            keyCode = 39
+          } else if (e.accelerationIncludingGravity.y < -1) {
+            type = "keydown"
+            keyCode = 37
+          } else {
+            drone.acceleration.x = 0
+          }
+          if (e.accelerationIncludingGravity.x > 8){
+            type = "keydown"
+            keyCode = 40
+          } else if (e.accelerationIncludingGravity.x < 6){
+            type = "keydown"
+            keyCode = 38
+          } else {
+            drone.acceleration.z = 0
+          }
+        }
+        if (e.accelerationIncludingGravity.x < -5){
+          if (e.accelerationIncludingGravity.y > 1){
+            type = "keydown"
+            keyCode = 37
+          } else if (e.accelerationIncludingGravity.y < -1) {
+            type = "keydown"
+            keyCode = 39
+          } else {
+            drone.acceleration.x = 0
+          }
+          if (e.accelerationIncludingGravity.x < -8){
+            type = "keydown"
+            keyCode = 40
+          } else if (e.accelerationIncludingGravity.x > -6){
+            type = "keydown"
+            keyCode = 38
+          } else {
+            drone.acceleration.z = 0
+          }
+        }
+        if (e.accelerationIncludingGravity.y > 5){
+          if (e.accelerationIncludingGravity.x > 1){
+            type = "keydown"
+            keyCode = 37
+          } else if (e.accelerationIncludingGravity.x < -1) {
+            type = "keydown"
+            keyCode = 39
+          } else {
+            drone.acceleration.x = 0
+          }
+          if (e.accelerationIncludingGravity.y > 8){
+            type = "keydown"
+            keyCode = 40
+          } else if (e.accelerationIncludingGravity.y < 6){
+            type = "keydown"
+            keyCode = 38
+          } else {
+            drone.acceleration.z = 0
+          }
+        }
+      }
+      if (e.type === "touchstart"){
+        type = "keydown"
+        keyCode = 32
+      }
+      if (e.type === "touchend"){
+        keyCode = 32
+      }
+      switch(keyCode) {
         case 13:
-          if (e.type === "keydown"){
+          if (type === "keydown"){
             this.onSubmit(e)
           }
           break;
 
         case 37:
-          if (e.type === "keydown"){
+          if (type === "keydown"){
             drone.acceleration.x = -100;
           } else {
             drone.acceleration.x = 0;
@@ -104,7 +205,7 @@ class Game extends Component {
           break;
 
         case 38:
-          if (e.type === "keydown"){
+          if (type === "keydown"){
             drone.acceleration.z = -100;
           } else {
             drone.acceleration.z = 0;
@@ -112,7 +213,7 @@ class Game extends Component {
           break;
 
         case 39:
-          if (e.type === "keydown"){
+          if (type === "keydown"){
             drone.acceleration.x = 100;
           } else {
             drone.acceleration.x = 0;
@@ -120,7 +221,7 @@ class Game extends Component {
           break;
 
         case 40:
-          if (e.type === "keydown"){
+          if (type === "keydown"){
             drone.acceleration.z = 100;
           } else {
             drone.acceleration.z = 0;
@@ -128,7 +229,7 @@ class Game extends Component {
           break;
 
         case 32:
-          if (e.type == "keydown"){
+          if (type === "keydown"){
             drone.acceleration.y = 100;
           } else {
             drone.acceleration.y = -981;
@@ -201,12 +302,14 @@ class Game extends Component {
   }
 
   render(){
+    let width    = this.state.imageWidth
+    let renderer = this.renderer
+    renderer.setSize(width, width * window.innerHeight / window.innerWidth)
     return (
       <div className = "container">
         <div id = "Game"></div>
-        <div style = {{width: "800px"}}>
-          <input type = "text" ref = {(c) => this.message = c} name = "message" style = {{width: "738px"}}/><button type = "button" onClick = {this.onSubmit} className = "btn btn-info">Send</button>
-        </div>
+        <input type = "text" ref = {(c) => this.message = c} name = "message" style = {{width: width - 62}}/><button type = "button" onClick = {this.onSubmit} className = "btn btn-info">Send</button>
+        <p>Use Space or Touch to fly. Use Arrow Keys or Rotation to move the drone.</p>
       </div>
     )
   }

@@ -10,7 +10,7 @@ class Media extends Component {
     this.play          = this.play.bind(this);
     this.turn          = this.turn.bind(this);
     this._handleResize = this._handleResize.bind(this);
-    this.camera        = new THREE.PerspectiveCamera(75, 360/270, 0.1, 1000);
+    this.camera        = new THREE.PerspectiveCamera(75, 1 / 0.56, 0.1, 1000);
     this.scene         = new THREE.Scene();
     this.renderer      = new THREE.WebGLRenderer();
     this.state = {
@@ -127,7 +127,7 @@ class Media extends Component {
             <p>This is a video of a racing of BMW M3 GTS.</p>
           </div>
           <div className = "col-sm-4">
-            <a href = "#" onClick={this.turn} id = "3DImage"></a>
+            <a href = "#" onClick = {this.turn} id = "3DImage"></a>
             <div dangerouslySetInnerHTML = {{__html: markdown.toHTML("This is a 3D image made with a RealSence Camera (Utrecht, The Netherlands).")}} />
           </div>
         </div>
