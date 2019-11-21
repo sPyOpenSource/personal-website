@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import WebTorrent from '../webtorrent';
+var WebTorrent = require('webtorrent');
 let THREE = require('../utils/OBJLoader');
-let markdown = require('../utils/markdown');
+const ReactMarkdown = require('react-markdown')
 
 class Media extends Component {
   constructor() {
@@ -106,7 +106,7 @@ class Media extends Component {
             <a href = "./media/0669.mp4" onClick = {this.play}>
               <img src = "img/videos/spring2.png" alt = "Story of the Spring" className = "img-responsive"></img>
             </a>
-            <div dangerouslySetInnerHTML = {{__html: markdown.toHTML("Story of the Spring at Chinese New Year's Eve Doelen (Rotterdam, The Netherlands).")}} />
+            <ReactMarkdown source={"Story of the Spring at Chinese New Year's Eve Doelen (Rotterdam, The Netherlands)."} />
           </div>
           <div className = "col-sm-4">
             <a href = "./media/0920.mp4" onClick = {this.play}>
@@ -128,7 +128,7 @@ class Media extends Component {
           </div>
           <div className = "col-sm-4">
             <a href = "#" onClick = {this.turn} id = "3DImage"></a>
-            <div dangerouslySetInnerHTML = {{__html: markdown.toHTML("This is a 3D image made with a RealSence Camera (Utrecht, The Netherlands).")}} />
+            <ReactMarkdown source={"This is a 3D image made with a RealSence Camera (Utrecht, The Netherlands)."} />
           </div>
         </div>
       </div>

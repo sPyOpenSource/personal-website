@@ -25,7 +25,7 @@ class Game extends Component {
     let animate    = this.animate;
     let handler    = this._handleResize;
     let objLoader  = new THREE.OBJLoader();
-    let TexLoader  = new THREE.TextureLoader();
+    //let TexLoader  = new THREE.TextureLoader();
     let keyLight   = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
     keyLight.position.set(-100, 0, 100);
 
@@ -285,18 +285,20 @@ class Game extends Component {
     let drone = this.scene.getObjectByName("drone");
     if (typeof drone != "undefined"){
       drone.velocity.x += delta * drone.acceleration.x;
-      drone.position.x += delta * drone.velocity.x;
-      drone.velocity.y += delta * drone.acceleration.y;
-      drone.position.y += delta * drone.velocity.y;
       drone.velocity.z += delta * drone.acceleration.z;
-      drone.position.z += delta * drone.velocity.z;
       if (drone.position.y <= 0){
         drone.position.y = 0;
         drone.velocity.y = 0;
         drone.rotation.x = 0;
         drone.rotation.y = 0;
         drone.rotation.z = 0;
+        drone.velocity.x = 0
+        drone.velocity.z = 0
       }
+      drone.position.x += delta * drone.velocity.x;
+      drone.velocity.y += delta * drone.acceleration.y;
+      drone.position.y += delta * drone.velocity.y;
+      drone.position.z += delta * drone.velocity.z;
     }
 		this.renderer.render(this.scene, this.camera);
   }

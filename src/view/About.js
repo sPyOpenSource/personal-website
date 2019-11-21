@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-const MathJax = require('react-mathjax');
 
 class About extends Component {
   render() {
@@ -14,29 +13,25 @@ class About extends Component {
                   I was born in 1988. In 2001 I emigrated from China to Netherlands.
                   In 2008 I started my study at Delft University of Technology.
                   In 2012 from August to November I have worked on a simulation project at FOM Institute AMOLF.
-                  In 2014 I&#8217;ve finished my Master&#8217;s degree (Applied Physics) at Delft University of Technology.
-                  I&#8217;ve worked on a Master&#8217;s Thesis Project of 2D crystalline materials at Molecular Electronics and Devices group of Quantum Nanoscience Department.
+                  In 2014 I've finished my Master's degree (Applied Physics) at Delft University of Technology.
+                  I've worked on a Master's Thesis Project of 2D crystalline materials at Molecular Electronics and Devices group of Quantum Nanoscience Department.
                   My main interest is the Nanooscience.
-                  I&#8217;m still looking for a job in a high tech company.
+                  I'm still looking for a job in a high tech company.
                   I have written following papers during my study at Delft University of Technology.
                 </p>
-                <MathJax.Context>
                   <a href="/html/papers/master.html">
                     <h2>
-                      Strain engineering in atomically thin MoS<MathJax.Node inline>{'_2'}</MathJax.Node> and MoSe<MathJax.Node inline>{'_2'}</MathJax.Node>
+                      Strain engineering in atomically thin MoS2 and MoSe2
                     </h2>
                   </a>
-                </MathJax.Context>
-                <MathJax.Context>
                   <p>
                     This is a research report for a Master’s thesis project within the Quantum Nanoscience Department.
-                    The aim of this project is to study strain engineering on 2D materials: MoS<MathJax.Node inline>{'_2'}</MathJax.Node> and MoSe<MathJax.Node inline>{'_2'}</MathJax.Node>.
+                    The aim of this project is to study strain engineering on 2D materials: MoS2 and MoSe2.
                     We would like to investigate the bandgap of these materials when strain is applied.
                     For that reason we have examined four different techniques to induce strain in 2D materials.
-                    Firstly we observe an opposite change of the bandgap of MoS<MathJax.Node inline>{'_2'}</MathJax.Node> by using our techniques compared to an experimental result from a reference.
-                    Secondly we do not see a significant change in the bandgap energy of MoSe<MathJax.Node inline>{'_2'}</MathJax.Node> when up to 0.4% strain is applied by using the wrinkling technique.
+                    Firstly we observe an opposite change of the bandgap of MoS2 by using our techniques compared to an experimental result from a reference.
+                    Secondly we do not see a significant change in the bandgap energy of MoSe2 when up to 0.4% strain is applied by using the wrinkling technique.
                   </p>
-                </MathJax.Context>
                 <a href="/html/papers/intern.html">
                   <h2>Simulating hindered diffusion</h2>
                 </a>
@@ -48,30 +43,24 @@ class About extends Component {
                   We have analysed the advantage and disadvantage of those simulation methods.
                   We have also investigate a model of mitochondria which describes the diffusion process inside mitochondria.
                 </p>
-                <MathJax.Context>
                   <a href="/html/papers/nano.html">
-                    <h2>Impact of plasma chemistry of SiO<MathJax.Node inline>{'_2'}</MathJax.Node> substrate etching</h2>
+                    <h2>Impact of plasma chemistry of SiO2 substrate etching</h2>
                   </a>
-                </MathJax.Context>
-                <MathJax.Context>
                   <p>
-                    In this report we present a dry etching technique for SiO<MathJax.Node inline>{'_2'}</MathJax.Node> substrate.
+                    In this report we present a dry etching technique for SiO2 substrate.
                     The whole process this technique of pattern design, pattern lithograph and etching are described in this report.
                     We have also inspected the structure before, after and during etching with different techniques.
                     The process of pattern transfer, coating of the photoresist and pattern development are also explained in this report.
                   </p>
-                </MathJax.Context>
                   <a href="/html/papers/bachelor.html">
                     <h2>Determination of the ionic capacitance of graphene</h2>
                   </a>
-                <MathJax.Context>
                   <p>
                     This is a report of a Bachelor’s thesis project. The aim of this project is to determinate the ionic capacitance of a free-standing graphene membrane.
                     During this research we encountered a problem that the support-chips have large capacitance contribution to the total capacitance, but we avoid this problem by using a different type of support-chip.
-                    Finally we found the capacitance of graphene which is 0.04±0.02 F/m<MathJax.Node inline>{'^2'}</MathJax.Node>.
+                    Finally we found the capacitance of graphene which is 0.04±0.02 F/m2.
                     This value agrees to the value which we have found in a literature.
                   </p>
-                </MathJax.Context>
             </div>
         </div>
     );

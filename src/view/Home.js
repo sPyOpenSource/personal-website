@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-var markdown = require('../utils/markdown');
+import React, { Component } from 'react'
+const ReactMarkdown = require('react-markdown')
 
 class Home extends Component {
   render() {
@@ -16,8 +16,8 @@ class Home extends Component {
         </p>
 	      <h2>News:</h2>
         <p>18 January 2019: I have added two videos and a drone simulation game.</p>
-        <div dangerouslySetInnerHTML={{__html: markdown.toHTML("7 October 2017: I've added p2p feature in video streaming.")}} />
-        <div dangerouslySetInnerHTML={{__html: markdown.toHTML("22 June 2017: I'm using react.js to build my website.")}} />
+        <ReactMarkdown source={"7 October 2017: I've added p2p feature in video streaming."} />
+        <ReactMarkdown source={"22 June 2017: I'm using react.js to build my website."} />
 	      <p>20 October 2016: I have made a new design for my website, please check it out.</p>
 	      <p>10 August 2015: I have made updates on my website, please check it out.</p>
 	      <p>5 April 2015: I have updated my web page.</p>
