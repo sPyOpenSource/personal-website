@@ -30,14 +30,14 @@ class Header extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#/home" onClick={this.reset}>Personal Website</a>
+            <a className="navbar-brand" href="#/home" onClick={this.reset}>G-Team</a>
           </div>
           <div className={this.state.classes}>
             <ul className="nav navbar-nav" onClick={this.reset}>
               <li><a href="#/about">About</a></li>
               <li><a href="#/media">Media</a></li>
               <li><a href="#/projects">Projects</a></li>
-              <li><a href="#/game">Game</a></li>
+              <li><a href="#/game">Games</a></li>
             </ul>
           </div>
         </div>

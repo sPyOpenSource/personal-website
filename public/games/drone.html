@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Drone Simulator</title>
+    <meta content="">
+    <style></style>
+    <script type="module">
+        import { Game } from './Game.js'
+        const game = new Game()
+        game.componentDidMount()
+    </script>
+  </head>
+  <body>
+  <div className="container">
+        <div id="Game"></div>
+        <input type="text"/><button type="button" className="btn btn-info">Send</button>
+        <p style="position:absolute;left:500px;top:10px;color:green">Use Space or Touch to fly. Use Arrow Keys or Rotation to move the drone.</p>
+      </div>
+  </body>
+</html>
