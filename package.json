@@ -10,7 +10,7 @@
     "react-redux": "^5.0.6",
     "react-router": "^3.2.6",
     "redux": "^3.7.2",
-    "three": "0.87.1",
+    "three": "0.125.0",
     "webtorrent": "0.107.16"
   },
   "devDependencies": {
