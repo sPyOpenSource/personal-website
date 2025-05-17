@@ -3,16 +3,66 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Refugive</title>
+        <title>Website</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="vendor/normalize.css">
         <link rel="stylesheet" href="css/board.css">
-
+	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
         <script type="text/html" id="home-template">
-            <h2>Your Ads</h2>
-            <button class="add" type="submit">Add Ad</button>
-            <h3 class="loading">Loading...</h3>
+	    <div class="container">
+	    <section id="about">
+            <h1>About</h1>
+		            <img src="img/portred.jpg" width="200px" style="float: left; margin-right: 10px;"></img>
+            <p>
+                I'm an engineer at <strong>Tetra B.V.</strong> in Utrecht. 
+		        I was born on February 10, 1988, in China. 
+		        I started my career in 2014.
+                I'm making <strong>OpenSource Software</strong>. 
+                I would like to invite you to join my journey to be a better programmer.
+                I have being a lot place in Europa and I have visite U.S.A once. 
+                I have also being some place in Asia.
+                My favorite programming languages are Java and Python. 
+                I'm also using other programming language like C/C++ and JavaScript.
+		    </p>
+            <p>
+                AI-driven automation is the use of <strong>artificial intelligence (AI)</strong> to perform or control tasks that normally require human intelligence or intervention. 
+                It can enhance the speed, accuracy, efficiency, and quality of various processes and systems, as well as create new opportunities and challenges.
+            </p>
+            <p>
+                Web3, also known as <strong>Web 3.0</strong>, represents the next evolution of the internet. 
+                It's a vision of a decentralized online ecosystem built on technologies like blockchain. 
+                Unlike the current Web 2.0, where large corporations often control data and services, Web3 aims to give users more ownership and control over their data and digital assets.
+            </p>
+            <p>
+                I prioritize security and reliability by using a <strong>type-safe</strong> instruction set as its primary protection mechanism. 
+                This approach allows for early detection of many programming errors through strict type checking. 
+                The key benefits of microkernel are a small trusted computing base (TCB), and high flexibility in its configuration. 
+                Those features contribute to a robust system, although additional security mechanisms are still necessary.
+            </p>
+	    </section>
+	    <section id="info">
+	        <h1>Info</h1>
+	        <img src="img/profile.jpg" class="img-responsive"></img>
+	    </section>
+	    <section id="contact">
+	        <h1>Contact</h1>
+	        <h4>Name: </h4><a href="mailto:xuyi_wang@hotmail.com"><img src="img/symbol.svg" width="20px"></img>Xuyi Wang</a>
+	        <h4>Adres:</h4>
+            The Netherlands<br>
+	        Rotterdam<br>
+		    3015 XN<br>
+		    Ochterveltstraat 44F
+	        <h4>Mobile: </h4>+31643158669<br>
+		<h4>Social Media:</h4>
+        <a href="https://www.github.com/sPyOpenSource"><img src="img/GitHub.svg" alt="GitHub" width="140px"></img></a>
+		<a href="https://www.linkedin.com/in/xuyi-wang-9196b128a/"><img src="img/LinkedIn.svg" alt="LinkedIn" width="140px"></img></a>
+		<a href="https://www.instagram.com/xuyiwang88/"><img src="img/Instagram.svg" alt="Instagram" width="140px"></img></a>
+		<a href="https://www.youtube.com/@xuyi_wang"><img src="img/YouTube.svg" alt="YouTube" width="140px"></img></a>
+		<a href="https://www.patreon.com/c/sPyPatreon"><img src="img/Patreon.svg" alt="Oatreon" width="140px"></img></a>
+		<a href="https://discord.com/invite/vY36wXPyxj"><img src="img/Discord.svg" alt="Discord" width="140px"></img></a>
+	    </section>
+	    </div>
         </script>
 
         <script type="text/html" id="login-template">
@@ -26,10 +76,10 @@
         </script>
 
         <script type="text/html" id="header-template">
-            <span class="title">Refugive</span>
+            <span class="title">Home</span>
                 <nav>
-                    <a href="/settings" class="button">Settings</a>
-                    <a href="#" class="logout button">Logout</a>
+                    <a href="#info" class="btn btn-info">Info</a>
+                    <a href="#contact" class="btn btn-success">Contact</a>
                 </nav>
         </script>
 
