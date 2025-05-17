@@ -1,0 +1,1 @@
+A personal website is a website that showcases your personal or professional identity, such as your skills, achievements, projects, hobbies, interests, or passions. A personal website can help you to build your online presence, promote your personal brand, network with others, and find new opportunities.
