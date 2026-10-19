@@ -2,87 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="stylesheet" href="/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jeff's Website</title>
+    <title>sPyOpenSource | Personal Website</title>
   </head>
-  <body>
-
-    <canvas id="bg"></canvas>   
-
-    <main>
-
-      <header>
-        <h1>Xuyi Wang</h1>
-        <p>🚀 Welcome to my website!</p>
-      </header>
-
-      <blockquote>
-        <p>I like making stuff and post it on the internet</p>
-      </blockquote>
-
-      <section>
-        <h2>📜 Manifesto</h2>
-        <p>
-I'm an engineer at Tetra B.V. in Utrecht. I was born on February 10, 1988, in China. I started my career in 2014. I'm making OpenSource Software. I would like to invite you to join my journey to be a better programmer. I have being a lot place in Europa and I have visite U.S.A once. I have also being some place in Asia. My favorite programming languages are Java and Python. I'm also using other programming language like C/C++ and JavaScript.
-<br>
-AI-driven automation is the use of artificial intelligence (AI) to perform or control tasks that normally require human intelligence or intervention. It can enhance the speed, accuracy, efficiency, and quality of various processes and systems, as well as create new opportunities and challenges.
-<br>
-Web3, also known as Web 3.0, represents the next evolution of the internet. It's a vision of a decentralized online ecosystem built on technologies like blockchain. Unlike the current Web 2.0, where large corporations often control data and services, Web3 aims to give users more ownership and control over their data and digital assets.
-<br>
-I prioritize security and reliability by using a type-safe instruction set as its primary protection mechanism. This approach allows for early detection of many programming errors through strict type checking. The key benefits of microkernel are a small trusted computing base (TCB), and high flexibility in its configuration. Those features contribute to a robust system, although additional security mechanisms are still necessary.        
-        </p>
-      </section>
-
-      <section class="light">
-        <h2>👩🏽‍🚀 Projects</h2>
-
-        <p>
-My JavaOS project.
-        </p>
-
-        <h2>🏆 Accomplishments</h2>
-
-        <p>
-I have received Master degree at TUDelft.
-        </p>
-
-      </section>
-
-      <blockquote>
-        <p>The best way out is always through <br>-Robert Frost</p>
-      </blockquote>
-
-      <section class="left">
-        <h2>🌮 Work History</h2>
-
-        <h3>Tetra</h3>
-        <p>
-We are using Python, C/C++, JavaScript, for automation projects.
-        </p>
-        <h3>CM</h3>
-        <p>
-We are using C# at FIAT Team.
-        </p>
-
-      </section>
-
-      <blockquote>
-        <p>Thanks for Visiting!</p>
-      </blockquote>
-
-    </main>
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "/build/three.module.js",
-        "three/addons/": "/examples/jsm/",
-        "three/src/": "/src/"
-      }
-    }
-    </script>
-    <script type="module" src="/main.js"></script>
-
+  <body class="bg-slate-950 text-slate-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -1,0 +1,6 @@
+{
+  "name": "sPyOpenSource Personal Website",
+  "description": "3D Personal Portfolio and Developer Website imported from sPyOpenSource/personal-website",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
